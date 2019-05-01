@@ -1,0 +1,61 @@
+
+entity Modele {
+	taille Long,
+	poids Long,
+	pointure Long,
+	taillePoitrine Long,
+    tourDeTaille Long,
+    tourDeHanche Long,
+    couleurDesYeux CouleurYeux,
+    couleurDeCheveux CouleurCheveux,
+    experience Experience,
+    type TypeModele
+}
+entity Photographe {
+ experience Experience,
+}
+entity Hotesse {
+	taille Long,
+	poids Long,
+    experience Experience,
+    type TypeHotesse,
+    deplacement Boolean,
+    disponibilite Disponibilite
+}
+entity Maquilleur{
+ experience Experience,
+}
+entity Styliste{
+ experience Experience,
+}
+entity Agence{
+ raisonSociale String,
+ valider Boolean
+}
+entity StylePhoto {
+nom String
+}
+relationship ManyToMany {
+	Modele{stylePhoto(nom)} to StylePhoto{modele}
+}
+relationship ManyToMany {
+	Photographe{stylePhoto(nom)} to StylePhoto{photographe}
+}
+enum CouleurYeux {
+    VERT, BLEU, MIEL
+}
+enum CouleurCheveux {
+    VERT, BLEU, MIEL
+}
+enum Experience {
+    DEBUTANT, AMATEUR, PRO, PASSIONNE, EXPERIMENTE
+}
+enum TypeModele {
+    MODELE, MANNEQUIN
+}
+enum TypeHotesse {
+    HOTESSE, ANIMATRICE
+}
+enum Disponibilite {
+    JOUR, SOIR, JOUR_SOIR
+}
