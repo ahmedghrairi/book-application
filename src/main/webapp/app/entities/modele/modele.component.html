@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span>Modeles</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-modele" [routerLink]="['/modele/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Modele
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="modeles">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Taille</span></th>
+            <th><span>Poids</span></th>
+            <th><span>Pointure</span></th>
+            <th><span>Taille Poitrine</span></th>
+            <th><span>Tour De Taille</span></th>
+            <th><span>Tour De Hanche</span></th>
+            <th><span>Couleur Des Yeux</span></th>
+            <th><span>Couleur De Cheveux</span></th>
+            <th><span>Experience</span></th>
+            <th><span>Type</span></th>
+            <th><span>Style Photo</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let modele of modeles ;trackBy: trackId">
+                <td><a [routerLink]="['/modele', modele.id, 'view' ]">{{modele.id}}</a></td>
+                <td>{{modele.taille}}</td>
+                <td>{{modele.poids}}</td>
+                <td>{{modele.pointure}}</td>
+                <td>{{modele.taillePoitrine}}</td>
+                <td>{{modele.tourDeTaille}}</td>
+                <td>{{modele.tourDeHanche}}</td>
+                <td>{{modele.couleurDesYeux}}</td>
+                <td>{{modele.couleurDeCheveux}}</td>
+                <td>{{modele.experience}}</td>
+                <td>{{modele.type}}</td>
+                <td>
+                    <span *ngFor="let stylePhoto of modele.stylePhotos; let last = last">
+                            <a class="form-control-static" [routerLink]="['../style-photo', stylePhoto?.id, 'view' ]">{{stylePhoto.nom}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/modele', modele.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/modele', modele.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'modele', { outlets: { popup: modele.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

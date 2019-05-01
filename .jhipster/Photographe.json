@@ -1,0 +1,29 @@
+{
+    "name": "Photographe",
+    "fields": [
+        {
+            "fieldName": "experience",
+            "fieldType": "Experience",
+            "fieldValues": "DEBUTANT,AMATEUR,PRO,PASSIONNE,EXPERIMENTE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "stylePhoto",
+            "otherEntityRelationshipName": "photographe",
+            "relationshipName": "stylePhoto",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190501170102",
+    "entityTableName": "photographe",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
