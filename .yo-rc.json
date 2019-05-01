@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "BookApplication",
+    "packageName": "io.bookapp",
+    "packageFolder": "io/bookapp",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "5.8.2",
+    "jwtSecretKey": "NDliYzUyNGEyODgxMjI0NjE1MTUwMzc2MTUyY2EzMzQ0NzU5MjQxYzAxYjRiNjY0NzVkYTQwYWFkNzBlZTJlYzRmMGNiM2Y1YjkzYjliMjk1MzQwOGU4ODA1NTk1MjhlNzhmY2NjNGZjMWQ0ODRjZmIxMmQ0MmJlMDQzMTQ1ZWQ=",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": []
+  },
+  "git-provider": "GitHub",
+  "git-company": "ahmedghrairi",
+  "repository-name": "book-application"
+}
