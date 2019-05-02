@@ -38,6 +38,17 @@ public class CacheConfiguration {
             cm.createCache(io.bookapp.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(io.bookapp.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(io.bookapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Modele.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Modele.class.getName() + ".stylePhotos", jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Photographe.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Photographe.class.getName() + ".stylePhotos", jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Hotesse.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Maquilleur.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Styliste.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.Agence.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.StylePhoto.class.getName(), jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.StylePhoto.class.getName() + ".modeles", jcacheConfiguration);
+            cm.createCache(io.bookapp.domain.StylePhoto.class.getName() + ".photographes", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

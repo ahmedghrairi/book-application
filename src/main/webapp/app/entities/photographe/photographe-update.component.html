@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-photographe-heading">Create or edit a Photographe</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!photographe.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="photographe.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_experience">Experience</label>
+                    <select class="form-control" name="experience" [(ngModel)]="photographe.experience" id="field_experience" >
+                        <option value="DEBUTANT">DEBUTANT</option>
+                        <option value="AMATEUR">AMATEUR</option>
+                        <option value="PRO">PRO</option>
+                        <option value="PASSIONNE">PASSIONNE</option>
+                        <option value="EXPERIMENTE">EXPERIMENTE</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_stylePhoto">Style Photo</label>
+                    <select class="form-control" id="field_stylePhoto" multiple name="stylePhoto" [(ngModel)]="photographe.stylePhotos">
+                        <option [ngValue]="getSelected(photographe.stylePhotos, stylePhotoOption)" *ngFor="let stylePhotoOption of stylephotos; trackBy: trackStylePhotoById">{{stylePhotoOption.nom}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

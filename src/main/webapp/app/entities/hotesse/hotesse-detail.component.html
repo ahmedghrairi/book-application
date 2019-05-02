@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="hotesse">
+            <h2><span>Hotesse</span> {{hotesse.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Taille</span></dt>
+                <dd>
+                    <span>{{hotesse.taille}}</span>
+                </dd>
+                <dt><span>Poids</span></dt>
+                <dd>
+                    <span>{{hotesse.poids}}</span>
+                </dd>
+                <dt><span>Experience</span></dt>
+                <dd>
+                    <span>{{hotesse.experience}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{hotesse.type}}</span>
+                </dd>
+                <dt><span>Deplacement</span></dt>
+                <dd>
+                    <span>{{hotesse.deplacement}}</span>
+                </dd>
+                <dt><span>Disponibilite</span></dt>
+                <dd>
+                    <span>{{hotesse.disponibilite}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/hotesse', hotesse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

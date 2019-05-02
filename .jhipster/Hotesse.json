@@ -1,0 +1,42 @@
+{
+    "name": "Hotesse",
+    "fields": [
+        {
+            "fieldName": "taille",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "poids",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "experience",
+            "fieldType": "Experience",
+            "fieldValues": "DEBUTANT,AMATEUR,PRO,PASSIONNE,EXPERIMENTE"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TypeHotesse",
+            "fieldValues": "HOTESSE,ANIMATRICE"
+        },
+        {
+            "fieldName": "deplacement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "disponibilite",
+            "fieldType": "Disponibilite",
+            "fieldValues": "JOUR,SOIR,JOUR_SOIR"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190501170103",
+    "entityTableName": "hotesse",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

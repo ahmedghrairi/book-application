@@ -1,0 +1,20 @@
+{
+    "name": "Maquilleur",
+    "fields": [
+        {
+            "fieldName": "experience",
+            "fieldType": "Experience",
+            "fieldValues": "DEBUTANT,AMATEUR,PRO,PASSIONNE,EXPERIMENTE"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190501170104",
+    "entityTableName": "maquilleur",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

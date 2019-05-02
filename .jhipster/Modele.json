@@ -1,0 +1,68 @@
+{
+    "name": "Modele",
+    "fields": [
+        {
+            "fieldName": "taille",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "poids",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "pointure",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "taillePoitrine",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tourDeTaille",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "tourDeHanche",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "couleurDesYeux",
+            "fieldType": "CouleurYeux",
+            "fieldValues": "VERT,BLEU,MIEL"
+        },
+        {
+            "fieldName": "couleurDeCheveux",
+            "fieldType": "CouleurCheveux",
+            "fieldValues": "VERT,BLEU,MIEL"
+        },
+        {
+            "fieldName": "experience",
+            "fieldType": "Experience",
+            "fieldValues": "DEBUTANT,AMATEUR,PRO,PASSIONNE,EXPERIMENTE"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TypeModele",
+            "fieldValues": "MODELE,MANNEQUIN"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "stylePhoto",
+            "otherEntityRelationshipName": "modele",
+            "relationshipName": "stylePhoto",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190501170101",
+    "entityTableName": "modele",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

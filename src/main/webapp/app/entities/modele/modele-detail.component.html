@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="modele">
+            <h2><span>Modele</span> {{modele.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Taille</span></dt>
+                <dd>
+                    <span>{{modele.taille}}</span>
+                </dd>
+                <dt><span>Poids</span></dt>
+                <dd>
+                    <span>{{modele.poids}}</span>
+                </dd>
+                <dt><span>Pointure</span></dt>
+                <dd>
+                    <span>{{modele.pointure}}</span>
+                </dd>
+                <dt><span>Taille Poitrine</span></dt>
+                <dd>
+                    <span>{{modele.taillePoitrine}}</span>
+                </dd>
+                <dt><span>Tour De Taille</span></dt>
+                <dd>
+                    <span>{{modele.tourDeTaille}}</span>
+                </dd>
+                <dt><span>Tour De Hanche</span></dt>
+                <dd>
+                    <span>{{modele.tourDeHanche}}</span>
+                </dd>
+                <dt><span>Couleur Des Yeux</span></dt>
+                <dd>
+                    <span>{{modele.couleurDesYeux}}</span>
+                </dd>
+                <dt><span>Couleur De Cheveux</span></dt>
+                <dd>
+                    <span>{{modele.couleurDeCheveux}}</span>
+                </dd>
+                <dt><span>Experience</span></dt>
+                <dd>
+                    <span>{{modele.experience}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{modele.type}}</span>
+                </dd>
+                <dt><span>Style Photo</span></dt>
+                <dd>
+                    <span *ngFor="let stylePhoto of modele.stylePhotos; let last = last">
+                        <a [routerLink]="['/style-photo', stylePhoto?.id, 'view' ]">{{stylePhoto.nom}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/modele', modele.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
