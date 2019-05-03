@@ -9,7 +9,8 @@ entity Modele {
     couleurDesYeux CouleurYeux,
     couleurDeCheveux CouleurCheveux,
     experience Experience,
-    type TypeModele
+    type TypeModele,
+    photo Blob
 }
 entity Photographe {
  experience Experience,
