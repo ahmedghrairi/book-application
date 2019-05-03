@@ -24,7 +24,7 @@ import io.bookapp.domain.enumeration.Disponibilite;
 public class Hotesse implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -143,19 +143,15 @@ public class Hotesse implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Hotesse)) {
             return false;
         }
-        Hotesse hotesse = (Hotesse) o;
-        if (hotesse.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), hotesse.getId());
+        return id != null && id.equals(((Hotesse) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

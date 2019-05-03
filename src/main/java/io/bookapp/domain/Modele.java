@@ -28,7 +28,7 @@ import io.bookapp.domain.enumeration.TypeModele;
 public class Modele implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -244,19 +244,15 @@ public class Modele implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Modele)) {
             return false;
         }
-        Modele modele = (Modele) o;
-        if (modele.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), modele.getId());
+        return id != null && id.equals(((Modele) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

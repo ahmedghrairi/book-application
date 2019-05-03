@@ -13,7 +13,6 @@ import java.util.Optional;
 /**
  * Spring Data  repository for the Modele entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface ModeleRepository extends JpaRepository<Modele, Long> {
 
@@ -21,7 +20,7 @@ public interface ModeleRepository extends JpaRepository<Modele, Long> {
         countQuery = "select count(distinct modele) from Modele modele")
     Page<Modele> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct modele from Modele modele left join fetch modele.stylePhotos")
+    @Query("select distinct modele from Modele modele left join fetch modele.stylePhotos")
     List<Modele> findAllWithEagerRelationships();
 
     @Query("select modele from Modele modele left join fetch modele.stylePhotos where modele.id =:id")
