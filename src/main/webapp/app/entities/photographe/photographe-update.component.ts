@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
-import { IPhotographe } from 'app/shared/model/photographe.model';
+import { IPhotographe, Photographe } from 'app/shared/model/photographe.model';
 import { PhotographeService } from './photographe.service';
 import { IStylePhoto } from 'app/shared/model/style-photo.model';
 import { StylePhotoService } from 'app/entities/style-photo';
@@ -19,16 +20,24 @@ export class PhotographeUpdateComponent implements OnInit {
 
     stylephotos: IStylePhoto[];
 
+    editForm = this.fb.group({
+        id: [],
+        experience: [],
+        stylePhotos: []
+    });
+
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected photographeService: PhotographeService,
         protected stylePhotoService: StylePhotoService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        private fb: FormBuilder
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ photographe }) => {
+            this.updateForm(photographe);
             this.photographe = photographe;
         });
         this.stylePhotoService
@@ -40,17 +49,36 @@ export class PhotographeUpdateComponent implements OnInit {
             .subscribe((res: IStylePhoto[]) => (this.stylephotos = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
+    updateForm(photographe: IPhotographe) {
+        this.editForm.patchValue({
+            id: photographe.id,
+            experience: photographe.experience,
+            stylePhotos: photographe.stylePhotos
+        });
+    }
+
     previousState() {
         window.history.back();
     }
 
     save() {
         this.isSaving = true;
-        if (this.photographe.id !== undefined) {
-            this.subscribeToSaveResponse(this.photographeService.update(this.photographe));
+        const photographe = this.createFromForm();
+        if (photographe.id !== undefined) {
+            this.subscribeToSaveResponse(this.photographeService.update(photographe));
         } else {
-            this.subscribeToSaveResponse(this.photographeService.create(this.photographe));
+            this.subscribeToSaveResponse(this.photographeService.create(photographe));
         }
+    }
+
+    private createFromForm(): IPhotographe {
+        const entity = {
+            ...new Photographe(),
+            id: this.editForm.get(['id']).value,
+            experience: this.editForm.get(['experience']).value,
+            stylePhotos: this.editForm.get(['stylePhotos']).value
+        };
+        return entity;
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IPhotographe>>) {
@@ -65,7 +93,6 @@ export class PhotographeUpdateComponent implements OnInit {
     protected onSaveError() {
         this.isSaving = false;
     }
-
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
