@@ -37,6 +37,8 @@ export interface IModele {
     couleurDeCheveux?: CouleurCheveux;
     experience?: Experience;
     type?: TypeModele;
+    photoContentType?: string;
+    photo?: any;
     stylePhotos?: IStylePhoto[];
 }
 
@@ -53,6 +55,8 @@ export class Modele implements IModele {
         public couleurDeCheveux?: CouleurCheveux,
         public experience?: Experience,
         public type?: TypeModele,
+        public photoContentType?: string,
+        public photo?: any,
         public stylePhotos?: IStylePhoto[]
     ) {}
 }

@@ -49,6 +49,17 @@ public class CacheConfiguration {
             cm.createCache(io.bookapp.domain.StylePhoto.class.getName(), jcacheConfiguration);
             cm.createCache(io.bookapp.domain.StylePhoto.class.getName() + ".modeles", jcacheConfiguration);
             cm.createCache(io.bookapp.domain.StylePhoto.class.getName() + ".photographes", jcacheConfiguration);
+            createCache(cm, io.bookapp.domain.Modele.class.getName());
+            createCache(cm, io.bookapp.domain.Modele.class.getName() + ".stylePhotos");
+            createCache(cm, io.bookapp.domain.Photographe.class.getName());
+            createCache(cm, io.bookapp.domain.Photographe.class.getName() + ".stylePhotos");
+            createCache(cm, io.bookapp.domain.Hotesse.class.getName());
+            createCache(cm, io.bookapp.domain.Maquilleur.class.getName());
+            createCache(cm, io.bookapp.domain.Styliste.class.getName());
+            createCache(cm, io.bookapp.domain.Agence.class.getName());
+            createCache(cm, io.bookapp.domain.StylePhoto.class.getName());
+            createCache(cm, io.bookapp.domain.StylePhoto.class.getName() + ".modeles");
+            createCache(cm, io.bookapp.domain.StylePhoto.class.getName() + ".photographes");
             // jhipster-needle-ehcache-add-entry
         };
     }

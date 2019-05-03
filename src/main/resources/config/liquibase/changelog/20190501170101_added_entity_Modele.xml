@@ -3,7 +3,7 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
@@ -12,7 +12,7 @@
     <property name="autoIncrement" value="true"/>
 
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
 
     <!--
         Added the entity Modele.
@@ -62,9 +62,50 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="photo" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="photo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
+    </changeSet>
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20190501170101-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/modele.csv"
+                  separator=";"
+                  tableName="modele"
+                  context="dev">
+            <column name="id" type="numeric"/>
+            <column name="taille" type="numeric"/>
+            <column name="poids" type="numeric"/>
+            <column name="pointure" type="numeric"/>
+            <column name="taille_poitrine" type="numeric"/>
+            <column name="tour_de_taille" type="numeric"/>
+            <column name="tour_de_hanche" type="numeric"/>
+            <column name="couleur_des_yeux" type="string"/>
+            <column name="couleur_de_cheveux" type="string"/>
+            <column name="experience" type="string"/>
+            <column name="jhi_type" type="string"/>
+            <column name="photo" type="string"/>
+            <column name="photo_content_type" type="string"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="20190501170101-1-relations" author="jhipster">
+
         <createTable tableName="modele_style_photo">
             <column name="style_photo_id" type="bigint">
                 <constraints nullable="false"/>

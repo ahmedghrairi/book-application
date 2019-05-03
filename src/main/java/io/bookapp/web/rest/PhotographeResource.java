@@ -1,11 +1,14 @@
 package io.bookapp.web.rest;
+
 import io.bookapp.domain.Photographe;
 import io.bookapp.repository.PhotographeRepository;
 import io.bookapp.web.rest.errors.BadRequestAlertException;
-import io.bookapp.web.rest.util.HeaderUtil;
+
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing Photographe.
+ * REST controller for managing {@link io.bookapp.domain.Photographe}.
  */
 @RestController
 @RequestMapping("/api")
@@ -26,6 +29,9 @@ public class PhotographeResource {
 
     private static final String ENTITY_NAME = "photographe";
 
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
     private final PhotographeRepository photographeRepository;
 
     public PhotographeResource(PhotographeRepository photographeRepository) {
@@ -33,11 +39,11 @@ public class PhotographeResource {
     }
 
     /**
-     * POST  /photographes : Create a new photographe.
+     * {@code POST  /photographes} : Create a new photographe.
      *
-     * @param photographe the photographe to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new photographe, or with status 400 (Bad Request) if the photographe has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param photographe the photographe to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new photographe, or with status {@code 400 (Bad Request)} if the photographe has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/photographes")
     public ResponseEntity<Photographe> createPhotographe(@RequestBody Photographe photographe) throws URISyntaxException {
@@ -47,18 +53,18 @@ public class PhotographeResource {
         }
         Photographe result = photographeRepository.save(photographe);
         return ResponseEntity.created(new URI("/api/photographes/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /photographes : Updates an existing photographe.
+     * {@code PUT  /photographes} : Updates an existing photographe.
      *
-     * @param photographe the photographe to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated photographe,
-     * or with status 400 (Bad Request) if the photographe is not valid,
-     * or with status 500 (Internal Server Error) if the photographe couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param photographe the photographe to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated photographe,
+     * or with status {@code 400 (Bad Request)} if the photographe is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the photographe couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/photographes")
     public ResponseEntity<Photographe> updatePhotographe(@RequestBody Photographe photographe) throws URISyntaxException {
@@ -68,15 +74,15 @@ public class PhotographeResource {
         }
         Photographe result = photographeRepository.save(photographe);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, photographe.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, photographe.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /photographes : get all the photographes.
+     * {@code GET  /photographes} : get all the photographes.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
-     * @return the ResponseEntity with status 200 (OK) and the list of photographes in body
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of photographes in body.
      */
     @GetMapping("/photographes")
     public List<Photographe> getAllPhotographes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
@@ -85,10 +91,10 @@ public class PhotographeResource {
     }
 
     /**
-     * GET  /photographes/:id : get the "id" photographe.
+     * {@code GET  /photographes/:id} : get the "id" photographe.
      *
-     * @param id the id of the photographe to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the photographe, or with status 404 (Not Found)
+     * @param id the id of the photographe to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the photographe, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/photographes/{id}")
     public ResponseEntity<Photographe> getPhotographe(@PathVariable Long id) {
@@ -98,15 +104,15 @@ public class PhotographeResource {
     }
 
     /**
-     * DELETE  /photographes/:id : delete the "id" photographe.
+     * {@code DELETE  /photographes/:id} : delete the "id" photographe.
      *
-     * @param id the id of the photographe to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the photographe to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/photographes/{id}")
     public ResponseEntity<Void> deletePhotographe(@PathVariable Long id) {
         log.debug("REST request to delete Photographe : {}", id);
         photographeRepository.deleteById(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

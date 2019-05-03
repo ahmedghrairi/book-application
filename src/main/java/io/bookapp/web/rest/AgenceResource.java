@@ -1,11 +1,14 @@
 package io.bookapp.web.rest;
+
 import io.bookapp.domain.Agence;
 import io.bookapp.repository.AgenceRepository;
 import io.bookapp.web.rest.errors.BadRequestAlertException;
-import io.bookapp.web.rest.util.HeaderUtil;
+
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing Agence.
+ * REST controller for managing {@link io.bookapp.domain.Agence}.
  */
 @RestController
 @RequestMapping("/api")
@@ -26,6 +29,9 @@ public class AgenceResource {
 
     private static final String ENTITY_NAME = "agence";
 
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
     private final AgenceRepository agenceRepository;
 
     public AgenceResource(AgenceRepository agenceRepository) {
@@ -33,11 +39,11 @@ public class AgenceResource {
     }
 
     /**
-     * POST  /agences : Create a new agence.
+     * {@code POST  /agences} : Create a new agence.
      *
-     * @param agence the agence to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new agence, or with status 400 (Bad Request) if the agence has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param agence the agence to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new agence, or with status {@code 400 (Bad Request)} if the agence has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/agences")
     public ResponseEntity<Agence> createAgence(@RequestBody Agence agence) throws URISyntaxException {
@@ -47,18 +53,18 @@ public class AgenceResource {
         }
         Agence result = agenceRepository.save(agence);
         return ResponseEntity.created(new URI("/api/agences/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /agences : Updates an existing agence.
+     * {@code PUT  /agences} : Updates an existing agence.
      *
-     * @param agence the agence to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated agence,
-     * or with status 400 (Bad Request) if the agence is not valid,
-     * or with status 500 (Internal Server Error) if the agence couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param agence the agence to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated agence,
+     * or with status {@code 400 (Bad Request)} if the agence is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the agence couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/agences")
     public ResponseEntity<Agence> updateAgence(@RequestBody Agence agence) throws URISyntaxException {
@@ -68,14 +74,14 @@ public class AgenceResource {
         }
         Agence result = agenceRepository.save(agence);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, agence.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, agence.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /agences : get all the agences.
+     * {@code GET  /agences} : get all the agences.
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of agences in body
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of agences in body.
      */
     @GetMapping("/agences")
     public List<Agence> getAllAgences() {
@@ -84,10 +90,10 @@ public class AgenceResource {
     }
 
     /**
-     * GET  /agences/:id : get the "id" agence.
+     * {@code GET  /agences/:id} : get the "id" agence.
      *
-     * @param id the id of the agence to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the agence, or with status 404 (Not Found)
+     * @param id the id of the agence to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the agence, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/agences/{id}")
     public ResponseEntity<Agence> getAgence(@PathVariable Long id) {
@@ -97,15 +103,15 @@ public class AgenceResource {
     }
 
     /**
-     * DELETE  /agences/:id : delete the "id" agence.
+     * {@code DELETE  /agences/:id} : delete the "id" agence.
      *
-     * @param id the id of the agence to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the agence to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/agences/{id}")
     public ResponseEntity<Void> deleteAgence(@PathVariable Long id) {
         log.debug("REST request to delete Agence : {}", id);
         agenceRepository.deleteById(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }
