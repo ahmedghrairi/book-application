@@ -44,6 +44,11 @@
             "fieldName": "type",
             "fieldType": "TypeModele",
             "fieldValues": "MODELE,MANNEQUIN"
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         }
     ],
     "relationships": [

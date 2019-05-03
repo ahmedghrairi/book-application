@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Agence implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -70,19 +70,15 @@ public class Agence implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Agence)) {
             return false;
         }
-        Agence agence = (Agence) o;
-        if (agence.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), agence.getId());
+        return id != null && id.equals(((Agence) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

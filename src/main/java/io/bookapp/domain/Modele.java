@@ -28,7 +28,7 @@ import io.bookapp.domain.enumeration.TypeModele;
 public class Modele implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -66,6 +66,13 @@ public class Modele implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_type")
     private TypeModele type;
+
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -213,6 +220,32 @@ public class Modele implements Serializable {
         this.type = type;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public Modele photo(byte[] photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public Modele photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
     public Set<StylePhoto> getStylePhotos() {
         return stylePhotos;
     }
@@ -244,19 +277,15 @@ public class Modele implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Modele)) {
             return false;
         }
-        Modele modele = (Modele) o;
-        if (modele.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), modele.getId());
+        return id != null && id.equals(((Modele) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override
@@ -273,6 +302,8 @@ public class Modele implements Serializable {
             ", couleurDeCheveux='" + getCouleurDeCheveux() + "'" +
             ", experience='" + getExperience() + "'" +
             ", type='" + getType() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
             "}";
     }
 }

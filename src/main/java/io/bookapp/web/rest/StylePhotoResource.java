@@ -1,11 +1,14 @@
 package io.bookapp.web.rest;
+
 import io.bookapp.domain.StylePhoto;
 import io.bookapp.repository.StylePhotoRepository;
 import io.bookapp.web.rest.errors.BadRequestAlertException;
-import io.bookapp.web.rest.util.HeaderUtil;
+
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * REST controller for managing StylePhoto.
+ * REST controller for managing {@link io.bookapp.domain.StylePhoto}.
  */
 @RestController
 @RequestMapping("/api")
@@ -26,6 +29,9 @@ public class StylePhotoResource {
 
     private static final String ENTITY_NAME = "stylePhoto";
 
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
     private final StylePhotoRepository stylePhotoRepository;
 
     public StylePhotoResource(StylePhotoRepository stylePhotoRepository) {
@@ -33,11 +39,11 @@ public class StylePhotoResource {
     }
 
     /**
-     * POST  /style-photos : Create a new stylePhoto.
+     * {@code POST  /style-photos} : Create a new stylePhoto.
      *
-     * @param stylePhoto the stylePhoto to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new stylePhoto, or with status 400 (Bad Request) if the stylePhoto has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param stylePhoto the stylePhoto to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new stylePhoto, or with status {@code 400 (Bad Request)} if the stylePhoto has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/style-photos")
     public ResponseEntity<StylePhoto> createStylePhoto(@RequestBody StylePhoto stylePhoto) throws URISyntaxException {
@@ -47,18 +53,18 @@ public class StylePhotoResource {
         }
         StylePhoto result = stylePhotoRepository.save(stylePhoto);
         return ResponseEntity.created(new URI("/api/style-photos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /style-photos : Updates an existing stylePhoto.
+     * {@code PUT  /style-photos} : Updates an existing stylePhoto.
      *
-     * @param stylePhoto the stylePhoto to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated stylePhoto,
-     * or with status 400 (Bad Request) if the stylePhoto is not valid,
-     * or with status 500 (Internal Server Error) if the stylePhoto couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param stylePhoto the stylePhoto to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated stylePhoto,
+     * or with status {@code 400 (Bad Request)} if the stylePhoto is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the stylePhoto couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/style-photos")
     public ResponseEntity<StylePhoto> updateStylePhoto(@RequestBody StylePhoto stylePhoto) throws URISyntaxException {
@@ -68,14 +74,14 @@ public class StylePhotoResource {
         }
         StylePhoto result = stylePhotoRepository.save(stylePhoto);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stylePhoto.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, stylePhoto.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /style-photos : get all the stylePhotos.
+     * {@code GET  /style-photos} : get all the stylePhotos.
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of stylePhotos in body
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stylePhotos in body.
      */
     @GetMapping("/style-photos")
     public List<StylePhoto> getAllStylePhotos() {
@@ -84,10 +90,10 @@ public class StylePhotoResource {
     }
 
     /**
-     * GET  /style-photos/:id : get the "id" stylePhoto.
+     * {@code GET  /style-photos/:id} : get the "id" stylePhoto.
      *
-     * @param id the id of the stylePhoto to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the stylePhoto, or with status 404 (Not Found)
+     * @param id the id of the stylePhoto to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the stylePhoto, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/style-photos/{id}")
     public ResponseEntity<StylePhoto> getStylePhoto(@PathVariable Long id) {
@@ -97,15 +103,15 @@ public class StylePhotoResource {
     }
 
     /**
-     * DELETE  /style-photos/:id : delete the "id" stylePhoto.
+     * {@code DELETE  /style-photos/:id} : delete the "id" stylePhoto.
      *
-     * @param id the id of the stylePhoto to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the stylePhoto to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/style-photos/{id}")
     public ResponseEntity<Void> deleteStylePhoto(@PathVariable Long id) {
         log.debug("REST request to delete StylePhoto : {}", id);
         stylePhotoRepository.deleteById(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

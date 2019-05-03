@@ -45,6 +45,13 @@
                 <dd>
                     <span>{{modele.type}}</span>
                 </dd>
+                <dt><span>Photo</span></dt>
+                <dd>
+                    <div *ngIf="modele.photo">
+                        <a (click)="openFile(modele.photoContentType, modele.photo)">open</a>
+                        {{modele.photoContentType}}, {{byteSize(modele.photo)}}
+                    </div>
+                </dd>
                 <dt><span>Style Photo</span></dt>
                 <dd>
                     <span *ngFor="let stylePhoto of modele.stylePhotos; let last = last">

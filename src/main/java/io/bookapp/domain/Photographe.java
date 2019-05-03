@@ -22,7 +22,7 @@ import io.bookapp.domain.enumeration.Experience;
 public class Photographe implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -91,19 +91,15 @@ public class Photographe implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Photographe)) {
             return false;
         }
-        Photographe photographe = (Photographe) o;
-        if (photographe.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), photographe.getId());
+        return id != null && id.equals(((Photographe) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

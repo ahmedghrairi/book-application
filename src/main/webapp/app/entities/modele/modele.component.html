@@ -25,6 +25,7 @@
             <th><span>Couleur De Cheveux</span></th>
             <th><span>Experience</span></th>
             <th><span>Type</span></th>
+            <th><span>Photo</span></th>
             <th><span>Style Photo</span></th>
             <th></th>
             </tr>
@@ -43,12 +44,16 @@
                 <td>{{modele.experience}}</td>
                 <td>{{modele.type}}</td>
                 <td>
+                    <a *ngIf="modele.photo" (click)="openFile(modele.photoContentType, modele.photo)">open</a>
+                    <span *ngIf="modele.photo">{{modele.photoContentType}}, {{byteSize(modele.photo)}}</span>
+                </td>
+                <td>
                     <span *ngFor="let stylePhoto of modele.stylePhotos; let last = last">
                             <a class="form-control-static" [routerLink]="['../style-photo', stylePhoto?.id, 'view' ]">{{stylePhoto.nom}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+                    <div class="btn-group">
                         <button type="submit"
                                 [routerLink]="['/modele', modele.id, 'view' ]"
                                 class="btn btn-info btn-sm">
