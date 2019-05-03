@@ -2,7 +2,7 @@
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <!--
         Added the constraints for entity Photographe.
     -->
@@ -13,6 +13,7 @@
                                  constraintName="fk_photographe_style_photo_photographe_id"
                                  referencedColumnNames="id"
                                  referencedTableName="photographe"/>
+
         <addForeignKeyConstraint baseColumnNames="style_photo_id"
                                  baseTableName="photographe_style_photo"
                                  constraintName="fk_photographe_style_photo_style_photo_id"

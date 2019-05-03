@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { IAgence } from 'app/shared/model/agence.model';
+import { IAgence, Agence } from 'app/shared/model/agence.model';
 import { AgenceService } from './agence.service';
 
 @Component({
@@ -14,12 +14,27 @@ export class AgenceUpdateComponent implements OnInit {
     agence: IAgence;
     isSaving: boolean;
 
-    constructor(protected agenceService: AgenceService, protected activatedRoute: ActivatedRoute) {}
+    editForm = this.fb.group({
+        id: [],
+        raisonSociale: [],
+        valider: []
+    });
+
+    constructor(protected agenceService: AgenceService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ agence }) => {
+            this.updateForm(agence);
             this.agence = agence;
+        });
+    }
+
+    updateForm(agence: IAgence) {
+        this.editForm.patchValue({
+            id: agence.id,
+            raisonSociale: agence.raisonSociale,
+            valider: agence.valider
         });
     }
 
@@ -29,11 +44,22 @@ export class AgenceUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.agence.id !== undefined) {
-            this.subscribeToSaveResponse(this.agenceService.update(this.agence));
+        const agence = this.createFromForm();
+        if (agence.id !== undefined) {
+            this.subscribeToSaveResponse(this.agenceService.update(agence));
         } else {
-            this.subscribeToSaveResponse(this.agenceService.create(this.agence));
+            this.subscribeToSaveResponse(this.agenceService.create(agence));
         }
+    }
+
+    private createFromForm(): IAgence {
+        const entity = {
+            ...new Agence(),
+            id: this.editForm.get(['id']).value,
+            raisonSociale: this.editForm.get(['raisonSociale']).value,
+            valider: this.editForm.get(['valider']).value
+        };
+        return entity;
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IAgence>>) {

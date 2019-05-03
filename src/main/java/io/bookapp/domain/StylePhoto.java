@@ -21,7 +21,7 @@ import java.util.Objects;
 public class StylePhoto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -117,19 +117,15 @@ public class StylePhoto implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof StylePhoto)) {
             return false;
         }
-        StylePhoto stylePhoto = (StylePhoto) o;
-        if (stylePhoto.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), stylePhoto.getId());
+        return id != null && id.equals(((StylePhoto) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

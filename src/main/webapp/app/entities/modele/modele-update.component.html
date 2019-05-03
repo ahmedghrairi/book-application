@@ -1,47 +1,47 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-modele-heading">Create or edit a Modele</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!modele.id">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="modele.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_taille">Taille</label>
                     <input type="number" class="form-control" name="taille" id="field_taille"
-                        [(ngModel)]="modele.taille" />
+                           formControlName="taille"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_poids">Poids</label>
                     <input type="number" class="form-control" name="poids" id="field_poids"
-                        [(ngModel)]="modele.poids" />
+                           formControlName="poids"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_pointure">Pointure</label>
                     <input type="number" class="form-control" name="pointure" id="field_pointure"
-                        [(ngModel)]="modele.pointure" />
+                           formControlName="pointure"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_taillePoitrine">Taille Poitrine</label>
                     <input type="number" class="form-control" name="taillePoitrine" id="field_taillePoitrine"
-                        [(ngModel)]="modele.taillePoitrine" />
+                           formControlName="taillePoitrine"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tourDeTaille">Tour De Taille</label>
                     <input type="number" class="form-control" name="tourDeTaille" id="field_tourDeTaille"
-                        [(ngModel)]="modele.tourDeTaille" />
+                           formControlName="tourDeTaille"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_tourDeHanche">Tour De Hanche</label>
                     <input type="number" class="form-control" name="tourDeHanche" id="field_tourDeHanche"
-                        [(ngModel)]="modele.tourDeHanche" />
+                           formControlName="tourDeHanche"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_couleurDesYeux">Couleur Des Yeux</label>
-                    <select class="form-control" name="couleurDesYeux" [(ngModel)]="modele.couleurDesYeux" id="field_couleurDesYeux" >
+                    <select class="form-control" name="couleurDesYeux" formControlName="couleurDesYeux" id="field_couleurDesYeux">
                         <option value="VERT">VERT</option>
                         <option value="BLEU">BLEU</option>
                         <option value="MIEL">MIEL</option>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_couleurDeCheveux">Couleur De Cheveux</label>
-                    <select class="form-control" name="couleurDeCheveux" [(ngModel)]="modele.couleurDeCheveux" id="field_couleurDeCheveux" >
+                    <select class="form-control" name="couleurDeCheveux" formControlName="couleurDeCheveux" id="field_couleurDeCheveux">
                         <option value="VERT">VERT</option>
                         <option value="BLEU">BLEU</option>
                         <option value="MIEL">MIEL</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_experience">Experience</label>
-                    <select class="form-control" name="experience" [(ngModel)]="modele.experience" id="field_experience" >
+                    <select class="form-control" name="experience" formControlName="experience" id="field_experience">
                         <option value="DEBUTANT">DEBUTANT</option>
                         <option value="AMATEUR">AMATEUR</option>
                         <option value="PRO">PRO</option>
@@ -67,16 +67,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" [(ngModel)]="modele.type" id="field_type" >
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
                         <option value="MODELE">MODELE</option>
                         <option value="MANNEQUIN">MANNEQUIN</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="field_stylePhoto">Style Photo</label>
-                    <select class="form-control" id="field_stylePhoto" multiple name="stylePhoto" [(ngModel)]="modele.stylePhotos">
-                        <option [ngValue]="getSelected(modele.stylePhotos, stylePhotoOption)" *ngFor="let stylePhotoOption of stylephotos; trackBy: trackStylePhotoById">{{stylePhotoOption.nom}}</option>
+                    <label for="field_stylePhotos">Style Photo</label>
+                    <select class="form-control" id="field_stylePhotos" multiple name="stylePhotos" formControlName="stylePhotos">
+                        <option [ngValue]="getSelected(editForm.get('stylePhotos').value, stylePhotoOption)" *ngFor="let stylePhotoOption of stylephotos; trackBy: trackStylePhotoById">{{stylePhotoOption.nom}}</option>
                     </select>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
